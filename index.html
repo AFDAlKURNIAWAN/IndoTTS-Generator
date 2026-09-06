@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IndoTTS Generator</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- SCRIPT GOOGLE ADSENSE (Ganti ca-pub-xxx dengan ID AdSense Kamu Nanti) -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+  </head>
+  <body>
+    <div class="container">
+      <h1>Text-to-Speech Generator</h1>
+      <p class="subtitle">
+        Ubah teks tulisan Anda menjadi suara langsung di browser.
+      </p>
+
+      <!-- AREA IKLAN ADSENSE (Atas) -->
+      <div class="ad-banner">
+        <small>Iklan</small>
+        <!-- Tempatkan Kode Unit Iklan AdSense di sini -->
+      </div>
+
+      <!-- FORM INPUT TTS -->
+      <div class="tts-card">
+        <div class="form-group">
+          <label for="voiceSelect">Pilih Suara:</label>
+          <select id="voiceSelect">
+            <optgroup label="Bahasa Indonesia">
+              <option value="Gwyneth" selected>
+                Gwyneth (Wanita - Alami/Polly)
+              </option>
+              <option value="Ida">Ida (Wanita - Standar)</option>
+              <option value="Ardi">Ardi (Pria - Standar)</option>
+            </optgroup>
+            <optgroup label="Bahasa Inggris">
+              <option value="Joanna">Joanna (Wanita - US)</option>
+              <option value="Matthew">Matthew (Pria - US)</option>
+              <option value="Brian">Brian (Pria - UK)</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="textInput">Masukkan Teks:</label>
+          <textarea
+            id="textInput"
+            rows="5"
+            placeholder="Ketik atau tempel teks di sini..."
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="speedSelect">Kecepatan Suara:</label>
+          <select id="speedSelect">
+            <option value="0.75">0.75x (Lambat)</option>
+            <option value="1" selected>1.0x (Normal)</option>
+            <option value="1.25">1.25x (Cepat)</option>
+            <option value="1.5">1.5x (Sangat Cepat)</option>
+          </select>
+        </div>
+
+        <!-- PLAYER AUDIO -->
+        <p
+          id="statusMessage"
+          class="status-message"
+          role="status"
+          aria-live="polite"
+        ></p>
+
+        <!-- TOMBOL AKSI -->
+        <div class="button-group">
+          <button id="btnPlay" type="button" onclick="generateTTS()">
+            🔊 Putar Suara
+          </button>
+          <button
+            id="btnStop"
+            type="button"
+            onclick="stopTTS()"
+            class="btn-secondary"
+            disabled
+          >
+            ■ Hentikan
+          </button>
+        </div>
+      </div>
+
+      <!-- AREA IKLAN ADSENSE (Bawah) -->
+      <div class="ad-banner" style="margin-top: 20px">
+        <small>Iklan</small>
+        <!-- Tempatkan Kode Unit Iklan AdSense di sini -->
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

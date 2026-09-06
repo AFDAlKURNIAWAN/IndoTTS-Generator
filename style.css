@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f4f7f6;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 650px;
+  margin-top: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.tts-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #34495e;
+}
+
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+select:focus,
+textarea:focus {
+  border-color: #3498db;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.status-message {
+  min-height: 22px;
+  margin-bottom: 10px;
+  color: #5f6b66;
+  font-size: 14px;
+}
+
+button {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #3498db;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+button.btn-secondary {
+  background-color: #2ecc71;
+}
+
+button.btn-secondary:hover {
+  background-color: #27ae60;
+}
+
+button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+/* Slot Iklan AdSense */
+.ad-banner {
+  background: #e9ecef;
+  border: 1px dashed #adb5bd;
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px;
+  min-height: 90px;
+  margin-bottom: 20px;
+  color: #6c757d;
+}
