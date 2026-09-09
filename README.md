@@ -1,55 +1,37 @@
-# IndoTTS Generator
+# SuaraNusa
 
-Aplikasi web sederhana untuk mengubah teks menjadi suara menggunakan Web Speech API yang tersedia di browser.
+Converter text-to-speech ringan berbahasa Indonesia dengan ElevenLabs sebagai mesin utama dan Web Speech API sebagai fallback otomatis. Audio hanya mulai setelah pengguna menekan tombol, sehingga tidak ada autoplay.
 
 ## Fitur
 
-- Membaca teks berbahasa Indonesia atau Inggris.
-- Pilihan kecepatan: 0.75x, 1.0x, 1.25x, dan 1.5x.
-- Tombol untuk memutar dan menghentikan suara.
-- Tidak memerlukan server, API key, atau instalasi package.
-- Menampilkan status proses dan pesan ketika browser tidak mendukung text-to-speech.
+- Player artikel dengan tombol putar, jeda, lanjutkan, hentikan, dan putar ulang.
+- Progress bar, estimasi durasi, dan pilihan kecepatan 0.75x sampai 1.5x.
+- Input teks maksimal 500 karakter dengan penghitung karakter real-time.
+- ElevenLabs menghasilkan MP3 yang dapat diunduh; Web Speech API menjadi fallback saat API gagal atau kuota habis.
+- Pemecahan teks menjadi beberapa bagian agar lebih stabil pada browser yang memiliki batas panjang utterance.
+- Layout responsif dengan jarak jelas antara player dan slot iklan.
+- Jangan menaruh API key ElevenLabs di frontend. Gunakan backend proxy dengan environment variable; key yang pernah terekspos harus segera di-revoke dan diganti.
 
-## Cara Menjalankan
+## Menjalankan
 
-1. Buka `index.html` di browser modern.
-2. Pilih bahasa suara.
-3. Masukkan teks.
-4. Pilih kecepatan suara.
-5. Klik **Putar Suara**.
-6. Klik **Hentikan** untuk menghentikan suara.
+Buka `index.html` di browser modern. Untuk hasil daftar voice yang lebih konsisten, jalankan lewat server lokal seperti Live Server di VS Code.
 
-Untuk hasil yang lebih konsisten, jalankan melalui server lokal, misalnya ekstensi Live Server di VS Code. Membuka file HTML secara langsung juga dapat bekerja pada sebagian besar browser.
+## Tentang FreeTTS
 
-## Struktur File
+FreeTTS memiliki REST API di `https://freetts.org/api/v1/tts`. Dokumentasinya menyebut penggunaan `x-api-key`, batas rate request, dan file audio sementara. API juga tidak menyediakan CORS header secara default, sehingga jangan menaruh API key di `script.js` atau memanggil endpoint tersebut langsung dari browser.
 
-- `index.html`: struktur halaman dan kontrol aplikasi.
-- `style.css`: tampilan dan tata letak.
-- `script.js`: pemrosesan text-to-speech, pemilihan bahasa, status, dan validasi dukungan browser.
+Untuk fase berikutnya, gunakan backend proxy:
 
-## Catatan Penting
+1. Backend menerima teks dan id artikel dari frontend.
+2. Backend membersihkan teks, memanggil FreeTTS dengan secret dari environment, lalu menyimpan `file_id` atau MP3 di cache server.
+3. Frontend menerima URL audio dan menggunakan elemen `<audio>` sebagai jalur utama.
+4. Jika backend gagal, player kembali ke Web Speech API seperti implementasi MVP ini.
 
-Nama seperti Gwyneth, Ida, Ardi, Joanna, Matthew, dan Brian adalah label pilihan bahasa. Web Speech API tidak menjamin voice tertentu tersedia di setiap perangkat. Aplikasi akan memilih voice yang tersedia dengan bahasa yang sesuai, lalu menggunakan voice bawaan browser jika tidak ada voice yang cocok.
+FreeTTS free tier memiliki batas karakter/rate dan audio non-komersial dapat menyertakan watermark. Periksa Terms of Service dan lisensi sebelum digunakan untuk situs bermonetisasi.
 
-Browser dan sistem operasi yang berbeda dapat menghasilkan suara yang berbeda. Sebagian browser juga baru mengisi daftar voice beberapa saat setelah halaman dibuka.
-
-Aplikasi ini tidak menghasilkan atau mengunduh file MP3. Web Speech API hanya memutar suara secara langsung dan tidak menyediakan hasil audio sebagai file unduhan.
-
-## Pemeriksaan Error
-
-Pemeriksaan yang dapat dijalankan dari folder proyek:
+## Pemeriksaan
 
 ```bash
 node --check script.js
 git diff --check
 ```
-
-Selain itu, buka Developer Tools browser dengan `F12`, pilih tab **Console**, lalu pastikan tidak ada error JavaScript saat menekan tombol **Putar Suara**.
-
-## Jika Suara Tidak Keluar
-
-- Pastikan volume perangkat dan tab browser tidak dimatikan.
-- Gunakan browser modern seperti Chrome, Edge, atau Safari.
-- Coba teks yang lebih pendek.
-- Pastikan bahasa yang dipilih didukung oleh sistem operasi.
-- Muat ulang halaman agar daftar voice diperbarui.
