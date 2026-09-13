@@ -1,37 +1,53 @@
-# SuaraNusa
+# IndoTTS Generator
 
-Converter text-to-speech ringan berbahasa Indonesia dengan ElevenLabs sebagai mesin utama dan Web Speech API sebagai fallback otomatis. Audio hanya mulai setelah pengguna menekan tombol, sehingga tidak ada autoplay.
+Aplikasi React + Vite sederhana untuk mengubah teks menjadi audio menggunakan API ElevenLabs.
 
-## Fitur
+## Persyaratan
 
-- Player artikel dengan tombol putar, jeda, lanjutkan, hentikan, dan putar ulang.
-- Progress bar, estimasi durasi, dan pilihan kecepatan 0.75x sampai 1.5x.
-- Input teks maksimal 500 karakter dengan penghitung karakter real-time.
-- ElevenLabs menghasilkan MP3 yang dapat diunduh; Web Speech API menjadi fallback saat API gagal atau kuota habis.
-- Pemecahan teks menjadi beberapa bagian agar lebih stabil pada browser yang memiliki batas panjang utterance.
-- Layout responsif dengan jarak jelas antara player dan slot iklan.
-- Jangan menaruh API key ElevenLabs di frontend. Gunakan backend proxy dengan environment variable; key yang pernah terekspos harus segera di-revoke dan diganti.
+- Node.js 18 atau lebih baru
+- API key ElevenLabs
 
-## Menjalankan
+## Instalasi
 
-Buka `index.html` di browser modern. Untuk hasil daftar voice yang lebih konsisten, jalankan lewat server lokal seperti Live Server di VS Code.
+1. Install dependency:
 
-## Tentang FreeTTS
+   ```bash
+   npm install
+   ```
 
-FreeTTS memiliki REST API di `https://freetts.org/api/v1/tts`. Dokumentasinya menyebut penggunaan `x-api-key`, batas rate request, dan file audio sementara. API juga tidak menyediakan CORS header secara default, sehingga jangan menaruh API key di `script.js` atau memanggil endpoint tersebut langsung dari browser.
+2. Buat atau edit file `.env.local` di root project:
 
-Untuk fase berikutnya, gunakan backend proxy:
+   ```env
+   VITE_ELEVENLABS_API_KEY=your_api_key_here
+   ```
 
-1. Backend menerima teks dan id artikel dari frontend.
-2. Backend membersihkan teks, memanggil FreeTTS dengan secret dari environment, lalu menyimpan `file_id` atau MP3 di cache server.
-3. Frontend menerima URL audio dan menggunakan elemen `<audio>` sebagai jalur utama.
-4. Jika backend gagal, player kembali ke Web Speech API seperti implementasi MVP ini.
+   Ganti `your_api_key_here` dengan API key ElevenLabs Anda.
 
-FreeTTS free tier memiliki batas karakter/rate dan audio non-komersial dapat menyertakan watermark. Periksa Terms of Service dan lisensi sebelum digunakan untuk situs bermonetisasi.
+3. Jalankan server development:
 
-## Pemeriksaan
+   ```bash
+   npm run dev
+   ```
+
+   Buka URL yang ditampilkan Vite, biasanya `http://localhost:5173`.
+
+## Penggunaan
+
+1. Masukkan teks ke dalam textarea.
+2. Klik **Buat audio**.
+3. Tunggu proses selesai. Audio akan muncul dan diputar otomatis melalui pemutar audio.
+
+Aplikasi menggunakan voice ID bawaan `JBFqnCBsd6RMkjVDRZzb` dan model `eleven_flash_v2_5`. Integrasi API berada di `src/services/elevenlabs.js`, sedangkan antarmuka berada di `src/components/AudioGenerator.jsx`.
+
+## Perintah tersedia
 
 ```bash
-node --check script.js
-git diff --check
+npm run dev      # Jalankan server development
+npm run lint     # Periksa kode dengan ESLint
+npm run build    # Buat build production
+npm run preview  # Preview build production
 ```
+
+## Keamanan API key
+
+File `.env.local` sudah diabaikan oleh Git melalui `.gitignore`. Jangan commit API key ke repository atau membagikannya di kode sumber. Karena variabel `VITE_*` terekspos ke browser, penggunaan langsung dari frontend cocok untuk development atau penggunaan terbatas. Untuk production, pertimbangkan membuat backend/proxy agar API key tetap tersimpan di server.
