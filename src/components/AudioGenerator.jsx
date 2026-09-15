@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
+import {
+  Check,
+  LoaderCircle,
+  Play,
+  RotateCcw,
+  Sparkles,
+  WandSparkles,
+} from "lucide-react";
 import { generateSpeech } from "../services/elevenlabs";
 
 const DEFAULT_VOICE_ID = "JBFqnCBsd6RMkjVDRZzb";
 const SAMPLE_TEXTS = [
-  "Halo! Selamat datang di IndoTTS Generator. Saya siap membaca teks dalam bahasa Indonesia dengan suara natural.",
+  "Halo! Selamat datang di Suara.id Generator. Saya siap membaca teks dalam bahasa Indonesia dengan suara natural.",
   "Hari ini adalah hari yang bagus untuk belajar dan berkreasi. Mari kita buat audio dari teks yang sudah kita tulis.",
 ];
 
@@ -49,268 +57,142 @@ function AudioGenerator() {
   }
 
   return (
-    <main style={styles.page}>
-      <div style={styles.glowOne} />
-      <div style={styles.glowTwo} />
-
-      <section style={styles.card}>
-        <div style={styles.headerRow}>
-          <div style={styles.iconBadge}>🎙️</div>
-          <span style={styles.badge}>ElevenLabs</span>
-        </div>
-
-        <p style={styles.eyebrow}>Text-to-Speech</p>
-        <h1 style={styles.title}>Ubah teks menjadi suara</h1>
-        <p style={styles.description}>
-          Masukkan teks berbahasa Indonesia, lalu hasilkan audio dengan satu
-          klik untuk kebutuhan edukasi, demo, atau konten digital.
-        </p>
-
-        <div style={styles.exampleRow}>
-          {SAMPLE_TEXTS.map((sample) => (
-            <button
-              key={sample}
-              type="button"
-              onClick={() => setText(sample)}
-              style={styles.exampleButton}
-            >
-              {sample.slice(0, 32)}...
-            </button>
-          ))}
-        </div>
-
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <div style={styles.labelRow}>
-            <label htmlFor="speech-text" style={styles.label}>
-              Teks
-            </label>
-            <span style={styles.counter}>{characterCount} karakter</span>
+    <section
+      id="generator"
+      className="relative mx-auto max-w-6xl px-5 pb-24 sm:px-8"
+    >
+      <div className="grid overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.08)] lg:grid-cols-[0.82fr_1.18fr]">
+        <div className="bg-[#102a25] p-7 text-white sm:p-10 lg:p-12">
+          <div className="mb-16 flex items-center gap-3">
+            <div className="grid size-11 place-items-center rounded-2xl bg-[#d8f35d] text-[#102a25]">
+              <WandSparkles size={21} />
+            </div>
+            <span className="font-bold tracking-tight">
+              Suara<span className="text-[#d8f35d]">.id</span>
+            </span>
           </div>
-
-          <textarea
-            id="speech-text"
-            value={text}
-            onChange={(event) => setText(event.target.value)}
-            placeholder="Tuliskan teks yang ingin dibacakan..."
-            rows={7}
-            disabled={isLoading}
-            style={styles.textarea}
-          />
-
-          <div style={styles.actionRow}>
-            <button
-              type="submit"
-              disabled={isLoading}
-              style={styles.primaryButton}
-            >
-              {isLoading ? "Membuat audio..." : "Buat audio"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setText("")}
-              disabled={isLoading}
-              style={styles.secondaryButton}
-            >
-              Reset
-            </button>
-          </div>
-        </form>
-
-        {error && (
-          <p style={styles.error} role="alert">
-            {error}
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-[#d8f35d]">
+            Studio suara Indonesia
           </p>
-        )}
-
-        {audioUrl && (
-          <div style={styles.audioSection}>
-            <p style={styles.audioLabel}>Audio berhasil dibuat</p>
-            <audio controls autoPlay src={audioUrl} style={styles.audio}>
-              Browser Anda tidak mendukung pemutar audio.
-            </audio>
+          <h2 className="max-w-sm text-3xl font-black leading-[1.05] tracking-[-0.04em] sm:text-4xl">
+            Teks biasa, jadi suara yang berasa.
+          </h2>
+          <p className="mt-5 max-w-sm text-sm leading-7 text-slate-300">
+            Buat narasi yang hangat dan natural untuk video, pembelajaran,
+            podcast, dan apa pun yang sedang kamu bangun.
+          </p>
+          <div className="mt-12 space-y-4 text-sm text-slate-200">
+            {[
+              "Suara natural berbahasa Indonesia",
+              "Proses cepat dengan satu klik",
+              "Audio siap diputar dan diunduh",
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-3">
+                <span className="grid size-5 place-items-center rounded-full bg-[#d8f35d] text-[#102a25]">
+                  <Check size={13} strokeWidth={3} />
+                </span>
+                {item}
+              </div>
+            ))}
           </div>
-        )}
-      </section>
-    </main>
+        </div>
+        <div className="p-7 sm:p-10 lg:p-12">
+          <div className="mb-8 flex items-start justify-between gap-4">
+            <div>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-emerald-700">
+                Mulai membuat
+              </p>
+              <h2 className="text-2xl font-black tracking-tight text-slate-950">
+                Tulis naskahmu
+              </h2>
+            </div>
+            <div className="rounded-full bg-[#f0f6d0] p-3 text-emerald-800">
+              <Sparkles size={18} />
+            </div>
+          </div>
+          <div className="mb-7 flex flex-wrap gap-2">
+            {SAMPLE_TEXTS.map((sample) => (
+              <button
+                key={sample}
+                type="button"
+                onClick={() => setText(sample)}
+                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-left text-xs font-semibold text-slate-600 transition hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-800"
+              >
+                <Play size={11} className="mr-1 inline" />
+                {sample.slice(0, 28)}...
+              </button>
+            ))}
+          </div>
+          <form onSubmit={handleSubmit} className="grid gap-4">
+            <div className="flex items-center justify-between gap-3">
+              <label
+                htmlFor="speech-text"
+                className="text-sm font-bold text-slate-800"
+              >
+                Naskah audio
+              </label>
+              <span className="text-xs font-semibold text-slate-400">
+                {characterCount} karakter
+              </span>
+            </div>
+            <textarea
+              id="speech-text"
+              value={text}
+              onChange={(event) => setText(event.target.value)}
+              placeholder="Tuliskan teks yang ingin dibacakan..."
+              rows={7}
+              disabled={isLoading}
+              className="min-h-48 w-full resize-y rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10 disabled:cursor-wait disabled:opacity-60"
+            />
+            <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#d8f35d] px-5 py-3.5 text-sm font-black text-[#102a25] shadow-lg shadow-lime-900/10 transition hover:bg-[#c9e84b] disabled:cursor-wait disabled:opacity-60"
+              >
+                {isLoading ? (
+                  <LoaderCircle size={17} className="animate-spin" />
+                ) : (
+                  <WandSparkles size={17} />
+                )}
+                {isLoading ? "Membuat audio..." : "Buat audio"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setText("")}
+                disabled={isLoading}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-5 py-3.5 text-sm font-bold text-slate-600 transition hover:bg-slate-50 disabled:opacity-50"
+              >
+                <RotateCcw size={15} />
+                Reset
+              </button>
+            </div>
+          </form>
+          {error && (
+            <p
+              className="mt-5 rounded-xl bg-red-50 p-3 text-sm font-semibold leading-6 text-red-700"
+              role="alert"
+            >
+              {error}
+            </p>
+          )}
+          {audioUrl && (
+            <div className="mt-8 border-t border-slate-100 pt-6">
+              <p className="mb-3 flex items-center gap-2 text-sm font-black text-emerald-800">
+                <span className="grid size-5 place-items-center rounded-full bg-emerald-100">
+                  <Check size={12} />
+                </span>
+                Audio berhasil dibuat
+              </p>
+              <audio controls autoPlay src={audioUrl} className="w-full">
+                Browser Anda tidak mendukung pemutar audio.
+              </audio>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
   );
 }
-
-const styles = {
-  page: {
-    position: "relative",
-    minHeight: "100vh",
-    display: "grid",
-    placeItems: "center",
-    padding: "2rem 1rem",
-    background:
-      "linear-gradient(135deg, #eff6ff 0%, #f8fafc 50%, #ecfeff 100%)",
-    color: "#172033",
-    fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-    overflow: "hidden",
-  },
-  glowOne: {
-    position: "absolute",
-    width: "320px",
-    height: "320px",
-    borderRadius: "50%",
-    background: "rgba(59, 130, 246, 0.12)",
-    filter: "blur(40px)",
-    top: "10%",
-    left: "8%",
-  },
-  glowTwo: {
-    position: "absolute",
-    width: "360px",
-    height: "360px",
-    borderRadius: "50%",
-    background: "rgba(14, 165, 233, 0.14)",
-    filter: "blur(48px)",
-    bottom: "8%",
-    right: "10%",
-  },
-  card: {
-    position: "relative",
-    zIndex: 1,
-    width: "min(100%, 760px)",
-    padding: "clamp(1.5rem, 4vw, 2.5rem)",
-    border: "1px solid rgba(148, 163, 184, 0.2)",
-    borderRadius: "24px",
-    background: "rgba(255, 255, 255, 0.88)",
-    boxShadow: "0 24px 80px rgba(15, 23, 42, 0.12)",
-    backdropFilter: "blur(10px)",
-  },
-  headerRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.75rem",
-    marginBottom: "1rem",
-  },
-  iconBadge: {
-    width: "42px",
-    height: "42px",
-    display: "grid",
-    placeItems: "center",
-    borderRadius: "12px",
-    background: "linear-gradient(135deg, #dbeafe 0%, #c7d2fe 100%)",
-    fontSize: "1.3rem",
-  },
-  badge: {
-    padding: "0.45rem 0.7rem",
-    borderRadius: "999px",
-    background: "#ebf5ff",
-    color: "#0f5fa6",
-    fontSize: "0.75rem",
-    fontWeight: 800,
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-  },
-  eyebrow: {
-    margin: 0,
-    color: "#2563eb",
-    fontSize: "0.72rem",
-    fontWeight: 700,
-    letterSpacing: "0.12em",
-    textTransform: "uppercase",
-  },
-  title: {
-    margin: "0.7rem 0 0.6rem",
-    fontSize: "clamp(2rem, 5vw, 3.1rem)",
-    lineHeight: 1.1,
-  },
-  description: {
-    margin: "0 0 1.5rem",
-    color: "#475569",
-    lineHeight: 1.7,
-    fontSize: "1.03rem",
-  },
-  exampleRow: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "0.6rem",
-    marginBottom: "1.5rem",
-  },
-  exampleButton: {
-    border: "1px solid #dbeafe",
-    background: "#f8fbff",
-    color: "#0f172a",
-    borderRadius: "999px",
-    padding: "0.55rem 0.85rem",
-    cursor: "pointer",
-    font: "inherit",
-    fontSize: "0.8rem",
-  },
-  form: { display: "grid", gap: "0.85rem" },
-  labelRow: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "0.75rem",
-  },
-  label: { fontWeight: 700, fontSize: "0.95rem" },
-  counter: {
-    color: "#64748b",
-    fontSize: "0.82rem",
-    fontWeight: 600,
-  },
-  textarea: {
-    width: "100%",
-    boxSizing: "border-box",
-    padding: "1rem 1.1rem",
-    border: "1px solid #cbd5e1",
-    borderRadius: "16px",
-    background: "#f8fafc",
-    font: "inherit",
-    lineHeight: 1.6,
-    resize: "vertical",
-    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
-    outline: "none",
-    boxShadow: "0 0 0 0 rgba(59,130,246,0.3)",
-  },
-  actionRow: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "0.75rem",
-    marginTop: "0.25rem",
-  },
-  primaryButton: {
-    flex: "1 1 220px",
-    padding: "0.9rem 1.25rem",
-    border: 0,
-    borderRadius: "12px",
-    background: "linear-gradient(135deg, #0f7fe5 0%, #1554c9 100%)",
-    color: "#ffffff",
-    cursor: "pointer",
-    font: "inherit",
-    fontWeight: 700,
-    boxShadow: "0 12px 28px rgba(21, 84, 201, 0.22)",
-  },
-  secondaryButton: {
-    padding: "0.9rem 1rem",
-    border: "1px solid #cbd5e1",
-    borderRadius: "12px",
-    background: "#ffffff",
-    color: "#334155",
-    cursor: "pointer",
-    font: "inherit",
-    fontWeight: 700,
-  },
-  error: {
-    margin: "1rem 0 0",
-    color: "#b42318",
-    lineHeight: 1.5,
-    fontWeight: 600,
-  },
-  audioSection: {
-    marginTop: "2rem",
-    paddingTop: "1.5rem",
-    borderTop: "1px solid #e2e8f0",
-  },
-  audioLabel: {
-    margin: "0 0 0.9rem",
-    fontWeight: 800,
-    color: "#0f172a",
-  },
-  audio: { width: "100%", borderRadius: "12px" },
-};
 
 export default AudioGenerator;

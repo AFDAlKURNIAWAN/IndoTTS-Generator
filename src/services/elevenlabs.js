@@ -5,6 +5,7 @@ export async function generateSpeech(text, voiceId) {
   const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
 
   if (!apiKey || apiKey === "your_api_key_here") {
+    console.log("api berhasil diambil dari env", apiKey);
     throw new Error(
       "API key ElevenLabs belum dikonfigurasi di file .env.local.",
     );

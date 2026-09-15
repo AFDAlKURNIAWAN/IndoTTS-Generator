@@ -13,8 +13,8 @@ body,
 
 body {
   margin: 0;
-  font-family: Inter, "Segoe UI", sans-serif;
-  background: #eef6ff;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  background: #f7f8f4;
 }
 
 button,
@@ -22,7 +22,7 @@ textarea {
   font: inherit;
 }
 
-textarea:focus {
-  border-color: #60a5fa;
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.18);
+::selection {
+  background: #d8f35d;
+  color: #102a25;
 }
