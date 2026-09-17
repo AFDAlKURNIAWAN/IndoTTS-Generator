@@ -8,7 +8,7 @@ import Tutorial from "./components/Tutorial";
 
 function App() {
   return (
-    <div className="min-h-screen overflow-hidden bg-[#f7f8f4] text-slate-950">
+    <div className="min-h-screen overflow-hidden text-slate-950">
       <Navbar />
       <main>
         <Hero />

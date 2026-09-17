@@ -1,7 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap");
 @import "tailwindcss";
 
 * {
   box-sizing: border-box;
+}
+
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #17211f;
+  background: #f6f8f4;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      circle at 85% 4%,
+      rgba(216, 243, 93, 0.2),
+      transparent 25rem
+    ),
+    linear-gradient(180deg, #f8faf6 0%, #f1f5f0 100%);
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Manrope", sans-serif;
 }
 
 html,

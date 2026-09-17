@@ -61,9 +61,10 @@ function AudioGenerator() {
       id="generator"
       className="relative mx-auto max-w-6xl px-5 pb-24 sm:px-8"
     >
-      <div className="grid overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.08)] lg:grid-cols-[0.82fr_1.18fr]">
-        <div className="bg-[#102a25] p-7 text-white sm:p-10 lg:p-12">
-          <div className="mb-16 flex items-center gap-3">
+      <div className="grid overflow-hidden rounded-[1.5rem] border border-slate-200/80 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.1)] lg:grid-cols-[0.82fr_1.18fr]">
+        <div className="relative overflow-hidden bg-[#102a25] p-7 text-white sm:p-10 lg:p-12">
+          <div className="pointer-events-none absolute -bottom-24 -right-16 size-64 rounded-full border-[32px] border-[#d8f35d]/10" />
+          <div className="relative mb-16 flex items-center gap-3">
             <div className="grid size-11 place-items-center rounded-2xl bg-[#d8f35d] text-[#102a25]">
               <WandSparkles size={21} />
             </div>
@@ -71,17 +72,17 @@ function AudioGenerator() {
               Suara<span className="text-[#d8f35d]">.id</span>
             </span>
           </div>
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-[#d8f35d]">
+          <p className="relative mb-4 text-xs font-bold uppercase tracking-[0.22em] text-[#d8f35d]">
             Studio suara Indonesia
           </p>
-          <h2 className="max-w-sm text-3xl font-black leading-[1.05] tracking-[-0.04em] sm:text-4xl">
+          <h2 className="relative max-w-sm text-3xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
             Teks biasa, jadi suara yang berasa.
           </h2>
-          <p className="mt-5 max-w-sm text-sm leading-7 text-slate-300">
+          <p className="relative mt-5 max-w-sm text-sm leading-7 text-slate-300">
             Buat narasi yang hangat dan natural untuk video, pembelajaran,
             podcast, dan apa pun yang sedang kamu bangun.
           </p>
-          <div className="mt-12 space-y-4 text-sm text-slate-200">
+          <div className="relative mt-12 space-y-4 text-sm text-slate-200">
             {[
               "Suara natural berbahasa Indonesia",
               "Proses cepat dengan satu klik",
@@ -102,7 +103,7 @@ function AudioGenerator() {
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-emerald-700">
                 Mulai membuat
               </p>
-              <h2 className="text-2xl font-black tracking-tight text-slate-950">
+              <h2 className="text-2xl font-extrabold tracking-tight text-slate-950">
                 Tulis naskahmu
               </h2>
             </div>
